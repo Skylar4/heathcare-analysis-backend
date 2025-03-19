@@ -18,11 +18,11 @@ app.get("/", async (req, res) => {
   }
 });
 
-app.post("/", async (req, res) => {
+app.post("/api/v1/information", async (req, res) => {
   try {
     // Extract user input from request body
     const userInput = req.body;
-
+    console.log(userInput);
     const options = {
       method: "POST",
       url: "https://ai-medical-diagnosis-api-symptoms-to-results.p.rapidapi.com/analyzeSymptomsAndDiagnose",
@@ -36,16 +36,17 @@ app.post("/", async (req, res) => {
       data: userInput, // Send the user-provided data to the API
     };
 
+    console.log(options);
+
     const response = await axios.request(options);
-    res.json(response.data);
+    console.log(options);
+    res.json({
+      result: response.data,
+    });
   } catch (error) {
     console.error("Error:", error);
     res.status(500).json({ error: "Failed to fetch diagnosis results" });
   }
-});
-
-app.listen(3002, () => {
-  console.log("Backend Listening on port 3001");
 });
 
 app.listen(3001, function () {
