@@ -1,10 +1,12 @@
 import express from "express";
 import axios from "axios";
-
+import cors from "cors";
 const app = express();
 app.use(express.json()); // Middleware to parse JSON request bodies
 
 // Any questions text me RobinSuthar (Teams)
+
+app.use(cors());
 
 app.get("/", async (req, res) => {
   try {
